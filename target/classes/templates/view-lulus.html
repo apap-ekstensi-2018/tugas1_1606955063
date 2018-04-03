@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Kelulusan</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<div class="container">
+			<h2>Presentase Kelulusan</h2>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Tahun</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${thn}"></h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Program Studi</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${prodi.nama_prodi}"></h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Fakultas</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${prodi.fakultas.nama_fakultas}"></h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Universitas</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${prodi.fakultas.universitas.nama_univ}">Program Studi</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Persentase</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${persentase}+'%'"></h4>
+					<h4 th:text="${total_lulus}+' dari '+${jumlah_mahasiswa}+' Mahasiswa Telah Lulus'"></h4>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

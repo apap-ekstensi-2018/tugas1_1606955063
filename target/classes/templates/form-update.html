@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <title>Update Mahasiswa</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	
+	<div class="container">
+			<form th:object="${students}" action="/student/update/submit" method="post">
+				<div>
+					<h3>Update Mahasiswa</h3>
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="id_prodi">NPM</label>
+					</div>
+					<input type="text" class="form-control" name="npm" readonly="true" th:value="${student.npm}" th:field="${student.npm}" required = "true" />
+				</div>		
+				<div class="form-group">
+					<div>
+						<label for="nama">Nama Lengkap</label>
+					</div>
+					<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" th:value="${student.nama}" th:field="${student.nama}" required = "true" />
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="tempat_lahir">Tempat Lahir</label>
+					</div>
+					<input type="text" class="form-control" name="tempat_lahir" th:value="${student.tempat_lahir}" th:field="${student.tempat_lahir}" required = "true" />
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="tanggal_lahir">Tanggal Lahir</label>
+					</div>
+					<input type="date" class="form-control" name="tanggal_lahir" max="2017-10-09" th:value="${student.tanggal_lahir}" th:field="${student.tanggal_lahir}" required = "true" />
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="tempat_lahir">Jenis Kelamin</label>
+					</div>
+					<select name="jenis_kelamin" class="form-control" required="required" th:value="${student.jenis_kelamin}">
+						<option hidden="hidden" th:value="${student.jenis_kelamin}" th:text="${student.jenis_kelamin>=0}?'Perempuan':'Laki-laki'">Jenis Kelamin</option>
+						<option th:value="0">Pria</option>
+						<option th:value="1">Wanita</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="agama">Agama</label>
+					</div>
+					<select name="agama" class="form-control" required="required">
+						<option hidden="hidden" th:text="${student.agama}">Agama</option>
+						<option th:value="Islam">Islam</option>
+						<option th:value="Protestan">Protestan</option>
+						<option th:value="Katolik">Katolik</option>
+						<option th:value="Budha">Budha</option>
+						<option th:value="Hindu">Hindu</option>
+						<option th:value="Konghucu">Konghucu</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<div>
+						<label for="golongan_darah">Golongan Darah</label>
+					</div>
+					<select name="golongan_darah" class="form-control" th:value="${student.golongan_darah}" required="required">
+						<option hidden="hidden" th:text="${student.golongan_darah}" >Pilih Golongan Darah</option>
+						<option value="A+">A+</option>
+						<option value="A-">A-</option>
+						<option value="B+">B+</option>
+						<option value="B-">B-</option>
+						<option value="AB+">AB+</option>
+						<option value="AB-">AB-</option>
+						<option value="O+">O+</option>
+						<option value="O-">O-</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<div>
+						<label for="tahun_masuk">Tahun Masuk</label>
+					</div>
+					<input type="text" class="form-control" name="tahun_masuk" th:value="${student.tahun_masuk}" th:field="${student.tahun_masuk}" required = "true" />
+				</div>
+				
+				<div class="form-group">
+					<div>
+						<label for="jalur_masuk">Jalur Masuk</label>
+					</div>
+					<select name="jalur_masuk" class="form-control" th:value="${student.jalur_masuk}" required="required">
+						<option hidden="hidden" th:text="${student.jalur_masuk}">Pilih jalur masuk</option>
+						<option value="Undangan Olimpiade">Undangan Olimpiade</option>
+						<option value="Undangan Reguler/SNMPTN">Undangan Reguler/SNMPTN</option>
+						<option value="Undangan Paralel/PPKB">Undangan Paralel/PPKB</option>
+						<option value="Ujian Tulis Bersama/SBMPTN">Ujian Tulis Bersama/SBMPTN</option>
+						<option value="Ujian Tulis Mandiri">Ujian Tulis Mandiri</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<div>
+						<label for="id_prodi">ID Program Studi</label>
+					</div>
+					<input type="text" class="form-control" name="id_prodi" th:value="${student.id_prodi}" th:field="${student.id_prodi}" required = "true" />
+				</div>		
+				<div>
+					<button class="button" type="submit">Simpan</button>
+				</div>
+			</form>
+		</div>
+
+</body>
+
+</html>
+

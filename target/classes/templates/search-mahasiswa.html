@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+		<div th:replace="fragments/fragment :: header"></div>
+		<div class="container">
+			<h2>Cari Mahasiswa</h2>
+			<form action="/mahasiswa/cari" method="get">
+					<div class="form-group col-5">
+				<div th:hidden="false">
+					<label>Universitas</label>
+					<select class="custom-select" name="univ" th:disabled="${hideFakultas} != null">
+						<option th:each="data, i : ${optionsUniv}" th:value="${data.id}" th:text="${data.namaUniversitas}" th:attr="selected=${data.id} == ${idUnivSelected}"></option>
+					</select>
+					<input type="hidden" name="univ" th:value="${idUnivSelected}" th:disabled="${hideFakultas} == null"/>
+				</div>
+				<br/>
+				<div th:hidden="${hideFakultas} == null ? true">
+					<label>Fakultas</label>
+					<select class="custom-select" name="fakultas" th:disabled="${hideProdi} != null">
+						<option th:each="data : ${optionsFakul}" th:value="${data.id}" th:text="${data.namaFakultas}" th:attr="selected=${data.id} == ${idFakultasSelected}"></option>
+					</select>
+					<input type="hidden" name="fakultas" th:value="${idFakultasSelected}" th:disabled="${hideProdi} == null"/>
+				</div>
+				<br/>
+				<div th:hidden="${hideProdi} == null ? true">
+					<label>Program Studi</label>
+					<select class="custom-select" name="prodi">
+						<option th:each="data : ${optionsProdi}" th:value="${data.id}" th:text="${data.namaProdi}" th:attr="selected=${data.id} == ${idProdiSelected}"></option>
+					</select>
+				</div>
+				<br/>
+				<button class="btn btn-primary" type="submit" role="button">Cari</button>
+			</div>
+				</form>
+		</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <title>Data Mahasiswa Diupdate</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+		<div th:replace="fragments/fragment :: header"></div>
+		<h2>Data berhasil diupdate</h2>
+		<h3 th:text="'Mahasiswa dengan ' + ${student.npm} +' berhasil diupdate'">Student NPM</h3> 
+</body>
+</html>

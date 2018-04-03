@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <title>View All Mahasiswa</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+	<div th:replace="fragments/fragment :: header"></div>   
+<!--     	<h1>All Students</h1> -->
+        <div class="container" style="margin-left:120px;margin-right:120px;">
+        	<table id="studentTable" class="display" style="width:100%">
+        	<thead>
+        		<tr>
+        			<th align="left">No</th>
+        			<th align="left">NPM</th>
+        			<th align="left">Name</th>	
+        			<th align="left">Action</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd}?'odd'">
+        			<td th:text="${iterationStatus.count}"></td>
+        			<td th:text="${student.npm}"></td>
+        			<td th:text="${student.nama}"></td>
+        			<td>
+        				<a th:href="'/student/update/' + ${student.npm}" > Update Data </a>
+        			</td>
+        		</tr>
+        	</tbody>
+        	</table>
+        </div>
+    </body>
+</html>
+<!-- <script type="text/javascript" src="/js/jquery-1.12.4.js"></script> -->
+<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+<script th:inline="javascript">
+$(document).ready(function() {
+	$('#studentTable').DataTable();
+} );
+</script>

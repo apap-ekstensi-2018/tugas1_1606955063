@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <title>Data Mahasiswa Ditambahkan</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+		<div th:replace="fragments/fragment :: header"></div>
+		<h2>Data ini telah ditambahkan sebelumnya!</h2>
+		<h3 th:text="'Mahasiswa dengan ' + ${npm} +' telah ditambahkan sebelumnya'">Student NPM</h3> 
+</body>
+</html>
