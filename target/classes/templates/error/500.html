@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>500 Internal Server Error</title>
-	</head>
-	<body>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <title>500 Internal Server Error</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+		<div th:replace="fragments/fragment :: header"></div>
 		<h2>Internal Server Error</h2>
-	</body>
+</body>
 </html>

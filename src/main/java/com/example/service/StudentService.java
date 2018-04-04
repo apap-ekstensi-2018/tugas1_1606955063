@@ -29,4 +29,8 @@ public interface StudentService
     void addStudent (StudentModel mahasiswa);
     
     List<StudentModel> selectAllStudentsByProdi(String id_prodi);
+    
+    StudentModel selectMudaMahasiswa(String tahun_masuk, String id_prodi);
+    
+    StudentModel selectTuaMahasiswa(String tahun_masuk, String id_prodi);
 }

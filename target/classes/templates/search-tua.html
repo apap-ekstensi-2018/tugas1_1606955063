@@ -7,11 +7,11 @@
 <body>
 		<div th:replace="fragments/fragment :: header"></div>
 		<div>
-			<h2>Presentase Kelulusan</h2>
-			<form action="/kelulusan/submit" method="GET">
+			<h2>Search Mahasiswa Tua</h2>
+			<form action="/mahasiswa/cariMahasiswaTua" method="GET">
 					<div>
 						<div>
-							<strong><label for="tahun">Tahun</label></strong>
+							<strong><label for="tahun">Tahun Masuk</label></strong>
 						</div>
 						<input type="text" name="thn" th:value="${thn}" required="required"/>
 					</div>

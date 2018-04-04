@@ -47,7 +47,7 @@ public class StudentController
 
 
     @RequestMapping("/mahasiswa/tambah/submit")
-    public String addSubmit (@ModelAttribute StudentModel mahasiswa)
+    public String addSubmit (@ModelAttribute StudentModel mahasiswa, Model model)
     { 	
     	ProdiModel prodi = studentDAO.selectProdi(mahasiswa.getId_prodi());
     	String tahun_masuk = mahasiswa.getTahun_masuk().substring(2);
@@ -78,6 +78,7 @@ public class StudentController
     	
     	if(studentDAO.selectStudent(npm) == null) {
     		studentDAO.addStudent (mahasiswa);
+    		model.addAttribute("npm", npm);
             return "success-add";
     	}else {
     		return "already-add";
@@ -102,13 +103,13 @@ public class StudentController
     	String id = "0";
     	if(jalur_masuk.equals("Undangan Olimpiade")) {
     		id = "53";
-    	}else if(jalur_masuk == "Undangan Reguler/SNMPTN") {
+    	}else if(jalur_masuk.equals("Undangan Reguler/SNMPTN")){
     		id = "54";
-    	}else if(jalur_masuk == "Undangan Paralel/PPKB") {
+    	}else if(jalur_masuk.equals("Undangan Paralel/PPKB")) {
     		id = "55";
-    	}else if(jalur_masuk == "Ujian Tulis Bersama/SBMPTN") {
+    	}else if(jalur_masuk.equals("Ujian Tulis Bersama/SBMPTN")) {
     		id = "57";
-    	}else if(jalur_masuk == "Ujian Tulis Mandiri") {
+    	}else if(jalur_masuk.equals("Ujian Tulis Mandiri")) {
     		id = "62";
     	}
     	return id;
@@ -160,7 +161,7 @@ public class StudentController
         return "viewall";
     }
    
-    @RequestMapping("/student/update/{npm}")
+    @RequestMapping("/mahasiswa/ubah/{npm}")
     public String update (Model model, @PathVariable(value = "npm") String npm)
     {
     	StudentModel student = studentDAO.selectStudent(npm);
@@ -175,7 +176,7 @@ public class StudentController
         }
     }
     
-    @RequestMapping(value="/student/update/submit", method= RequestMethod.POST)
+    @RequestMapping(value="/mahasiswa/ubah/submit", method= RequestMethod.POST)
     public String updateSubmit (@ModelAttribute StudentModel student)
     {
     	ProdiModel prodi = studentDAO.selectProdi(student.getId_prodi());
@@ -264,6 +265,40 @@ public class StudentController
       	model.addAttribute("allProdi", allProdi);
 		return "search-prodi";
   	}
+    
+    @RequestMapping("/mahasiswa/cariMahasiswaMuda")
+  	public String cariMahasiswaMuda(Model model,
+  			@RequestParam(value = "id_prodi", required = false) String id_prodi, 
+    		@RequestParam(value = "thn", required = false) String thn) 
+    {
+    	StudentModel mahasiswaTermuda = studentDAO.selectMudaMahasiswa(thn, id_prodi);
+    	StudentModel mahasiswa = studentDAO.selectStudent(mahasiswaTermuda.getNpm());
+    	
+    	model.addAttribute("mahasiswa", mahasiswa);	
+    	return "view-muda";
+    }
+    
+    @RequestMapping("/mahasiswa/cariMuda")
+    public String viewCariTua() {
+    	return "search-usia";
+    }
+    
+    @RequestMapping("/mahasiswa/cariTua")
+    public String viewCariMuda() {
+    	return "search-tua";
+    }
+    
+    @RequestMapping("/mahasiswa/cariMahasiswaTua")
+  	public String cariMahasiswaTua(Model model,
+  			@RequestParam(value = "id_prodi", required = false) String id_prodi, 
+    		@RequestParam(value = "thn", required = false) String thn) 
+    {
+    	StudentModel mahasiswaTertua = studentDAO.selectTuaMahasiswa(thn, id_prodi);
+    	StudentModel mahasiswa = studentDAO.selectStudent(mahasiswaTertua.getNpm());
+    	
+    	model.addAttribute("mahasiswa", mahasiswa);	
+    	return "view-muda";
+    }
     
     @RequestMapping("/mahasiswa/cari")
   	public String cariMahasiswa(Model model, 

@@ -96,4 +96,16 @@ public class StudentServiceDatabase implements StudentService
     	log.info("select student with id_prodi "+id_prodi);
     	return studentMapper.selectAllStudentsByProdi(id_prodi);
     }  
+    
+    @Override
+    public StudentModel selectMudaMahasiswa(String tahun_masuk, String id_prodi)
+    {
+    	return studentMapper.selectMudaMahasiswa(tahun_masuk, id_prodi);
+    }  
+    
+    @Override
+    public StudentModel selectTuaMahasiswa(String tahun_masuk, String id_prodi)
+    {
+    	return studentMapper.selectMudaMahasiswa(tahun_masuk, id_prodi);
+    }  
 }

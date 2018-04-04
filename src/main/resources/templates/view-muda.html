@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Mahasiswa By NPM</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<div class="container">
+			<h3 th:text="'Lihat Data Mahasiswa - ' + ${mahasiswa.npm}">Data Mahasiswa</h3>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">NPM</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.npm}">NPM</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Nama</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.nama}">Nama</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Tempat/Tanggal Lahir</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.tempat_lahir} + ', ' + ${mahasiswa.tanggal_lahir}">Tempat/Tanggal Lahir</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Program Studi</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.prodi.nama_prodi}">Program Studi</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Fakultas</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.prodi.fakultas.nama_fakultas}">Fakultas</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Universitas</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.prodi.fakultas.universitas.nama_univ}">Universitas</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Jenis Kelamin</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.jenis_kelamin>=0}?'Perempuan':'Laki-laki'">Jenis Kelamin</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Agama</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.agama}">Agama</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Golongan Darah</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.golongan_darah}">Golongan Darah</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Tahun Masuk</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.tahun_masuk}">Tahun Masuk</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Jalur Masuk</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.jalur_masuk}">Jalur Masuk</h4>
+				</div>
+			</div>
+       		<div class="row">
+				<div class="col-sm-6">
+					<h4 style="font-weight: bold;">Status</h4>
+				</div>
+				<div class="col-sm-6">
+					<h4 th:text="${mahasiswa.status}">Status</h4>
+					<button class="button1">Lulus</button>
+					<button class="button">Non-aktifkan</button>
+				</div>
+			</div>	
+		</div>
+</body>
+</html>

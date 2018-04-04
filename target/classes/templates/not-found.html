@@ -3,12 +3,12 @@
 	xmlns:th="http://www.thymeleaf.org">
 	
 <head>
-    <title>Data Mahasiswa Ditambahkan</title>
+    <title>Data Tidak Ditemukan</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
 </head>
 
 <body>
-    	<h1>Student not found</h1>
-       	<h3 th:text="'Mahasiswa dengan NPM = ' + ${npm} +' tidak ditemukan'">Student NPM</h3>
+		<div th:replace="fragments/fragment :: header"></div>
+		<h2>Data tidak ditemukan</h2>
 </body>
 </html>

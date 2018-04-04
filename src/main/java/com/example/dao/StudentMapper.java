@@ -88,4 +88,10 @@ public interface StudentMapper
     
     @Select("select * from mahasiswa where id_prodi = #{id_prodi}")
     List<StudentModel> selectAllStudentsByProdi(@Param("id_prodi") String id_prodi);
+    
+    @Select("select * from mahasiswa where tahun_masuk = #{tahun_masuk} and id_prodi = #{id_prodi} ORDER BY tanggal_lahir DESC LIMIT 1")
+    StudentModel selectMudaMahasiswa(@Param("tahun_masuk") String tahun_masuk, @Param("id_prodi") String id_prodi);
+    
+    @Select("select * from mahasiswa where tahun_masuk = #{tahun_masuk} and id_prodi = #{id_prodi} ORDER BY tanggal_lahir ASC LIMIT 1")
+    StudentModel selectTuaMahasiswa(@Param("tahun_masuk") String tahun_masuk, @Param("id_prodi") String id_prodi);
 }
