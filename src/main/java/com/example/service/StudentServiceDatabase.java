@@ -90,11 +90,10 @@ public class StudentServiceDatabase implements StudentService
     	studentMapper.updateStudentNpm(npm_baru, npm_lama);
     }
     
-
     @Override
-    public void deleteStudent (String npm)
+    public List<StudentModel> selectAllStudentsByProdi(String id_prodi)
     {
-    	log.info("student "+npm+" deleted");
-    	studentMapper.deleteStudent(npm);
-    }
+    	log.info("select student with id_prodi "+id_prodi);
+    	return studentMapper.selectAllStudentsByProdi(id_prodi);
+    }  
 }

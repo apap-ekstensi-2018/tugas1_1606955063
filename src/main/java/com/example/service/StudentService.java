@@ -20,7 +20,6 @@ public interface StudentService
     
     Integer countJumlahMahasiswa (String tahun, int prodi);
     
-    //BELUM KEPAKE
     List<StudentModel> selectAllStudents ();
     
     void updateStudentNpm (String npm_baru, String npm_lama);
@@ -28,6 +27,6 @@ public interface StudentService
     void updateStudent (StudentModel student);
 
     void addStudent (StudentModel mahasiswa);
-
-    void deleteStudent (String npm);
+    
+    List<StudentModel> selectAllStudentsByProdi(String id_prodi);
 }

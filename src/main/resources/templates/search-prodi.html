@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+		<div th:replace="fragments/fragment :: header"></div>
+		<div class="container">
+			<h2>Cari Mahasiswa</h2>
+			<form action="/mahasiswa/cari" method="get">
+				<div class="form-group col-5">
+					<label>Pilih Universitas</label>
+					<select class="custom-select" name="universitas">
+						<option th:each="universitas, i:${universitasSelected}" th:value="${universitas.id}" th:text="${universitas.nama_univ}"></option>
+					</select>
+				</div>
+				
+				<div class="form-group col-5">
+					<label>Pilih Fakultas</label>
+					<select class="custom-select" name="fakultas">
+						<option th:each="fakultas, i:${fakultasSelected}" th:value="${fakultas.id}" th:text="${fakultas.nama_fakultas}"></option>
+					</select>
+				</div>
+				
+				<div class="form-group col-5">
+					<label>Pilih Prodi</label>
+					<select class="custom-select" name="prodi">
+						<option th:each="prodi, i:${allProdi}" th:value="${prodi.id}" th:text="${prodi.nama_prodi}"></option>
+					</select>
+				</div>
+				<button class="btn btn-primary" type="submit" role="button">Cari</button>
+			</form>
+		</div>
+</body>
+</html>

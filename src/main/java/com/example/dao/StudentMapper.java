@@ -86,7 +86,6 @@ public interface StudentMapper
     @Update("UPDATE mahasiswa SET npm = #{npm_baru} WHERE npm = #{npm_lama}")
     void updateStudentNpm (@Param("npm_baru") String npm_baru, @Param("npm_lama") String npm_lama);
     
-    //BELUM KEPAKE
-    @Delete("DELETE FROM mahasiswa WHERE npm = #{npm}")
-    void deleteStudent (@Param("npm") String npm);
+    @Select("select * from mahasiswa where id_prodi = #{id_prodi}")
+    List<StudentModel> selectAllStudentsByProdi(@Param("id_prodi") String id_prodi);
 }

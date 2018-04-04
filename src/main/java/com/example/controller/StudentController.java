@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import static org.mockito.Matchers.matches;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,12 @@ public class StudentController
 {
     @Autowired
     StudentService studentDAO;
+    @Autowired
+    UniversitasService universitasDAO;
+    @Autowired
+    FakultasService fakultasDAO;
+    @Autowired
+    ProdiService prodiDAO;
 
     @RequestMapping("/")
     public String index ()
@@ -144,11 +152,6 @@ public class StudentController
     	}	
 	}
     
-    @RequestMapping("/mahasiswa/cari")
-	public String cariMahasiswa() {
-		return "search-mahasiswa";
-	}
-    
     @RequestMapping("/mahasiswa/viewall")
     public String view (Model model)
     {
@@ -210,6 +213,95 @@ public class StudentController
         return "success-update";
     }
     
+    
+    @RequestMapping("/mahasiswa/cariUniv")
+	public String cariMahasiswa(Model model)
+    {
+    	log.info("start cari mahasiswa");
+    	List<UniversitasModel> allUniversitas = universitasDAO.selectAllUniversitas();	
+    	model.addAttribute("allUniversitas", allUniversitas);
+		return "search-universitas";
+	}
+    
+    @RequestMapping("/mahasiswa/cariFakultas")
+  	public String cariBasedUniversitas(Model model, @RequestParam(value = "universitas", required = false) String idUniversitas)
+    {
+      	List<UniversitasModel> allUniversitas = universitasDAO.selectAllUniversitas();
+      	for(UniversitasModel universitasSelected: allUniversitas) {
+      		if (universitasSelected.getId().equals(idUniversitas)){
+      			model.addAttribute("universitasSelected", universitasSelected);
+      		}
+      	}
+      	model.addAttribute("idUniversitas", idUniversitas);
+      	
+      	List<FakultasModel> allFakultas = fakultasDAO.selectAllFakultas(idUniversitas);
+      	model.addAttribute("allFakultas", allFakultas);
+		return "search-fakultas";
+  	}
+    
+    @RequestMapping("/mahasiswa/cariProdi")
+  	public String cariBasedFakultas(Model model, 
+  				@RequestParam(value = "universitas", required = false) String idUniversitas,
+  				@RequestParam(value = "fakultas", required = false) String idFakultas)
+      {
+      	List<UniversitasModel> allUniversitas = universitasDAO.selectAllUniversitas();
+      	for(UniversitasModel universitasSelected: allUniversitas) {
+      		if (universitasSelected.getId().equals(idUniversitas)){
+      			model.addAttribute("universitasSelected", universitasSelected);
+      		}
+      	}
+      	model.addAttribute("idUniversitas", idUniversitas);
+      	
+      	List<FakultasModel> allFakultas = fakultasDAO.selectAllFakultas(idUniversitas);
+      	for(FakultasModel fakultasSelected: allFakultas) {
+      		if (fakultasSelected.getId().equals(idFakultas)){
+      			model.addAttribute("fakultasSelected", fakultasSelected);
+      		}
+      	}
+      	model.addAttribute("idFakultas", idFakultas);
+      	
+      	List<ProdiModel> allProdi = prodiDAO.selectAllProdi(idFakultas);
+      	model.addAttribute("allProdi", allProdi);
+		return "search-prodi";
+  	}
+    
+    @RequestMapping("/mahasiswa/cari")
+  	public String cariMahasiswa(Model model, 
+  				@RequestParam(value = "universitas", required = false) String idUniversitas,
+  				@RequestParam(value = "fakultas", required = false) String idFakultas,
+  				@RequestParam(value = "prodi", required = false) String idProdi)
+      {
+    	List<UniversitasModel> allUniversitas = universitasDAO.selectAllUniversitas();
+      	for(UniversitasModel universitasSelected: allUniversitas) {
+      		if (universitasSelected.getId().equals(idUniversitas)){
+      			model.addAttribute("universitasSelected", universitasSelected);
+      		}
+      	}
+      	model.addAttribute("idUniversitas", idUniversitas);
+      	
+      	List<FakultasModel> allFakultas = fakultasDAO.selectAllFakultas(idUniversitas);
+      	for(FakultasModel fakultasSelected: allFakultas) {
+      		if (fakultasSelected.getId().equals(idFakultas)){
+      			model.addAttribute("fakultasSelected", fakultasSelected);
+      		}
+      	}
+      	model.addAttribute("idFakultas", idFakultas);
+      	
+      	List<ProdiModel> allProdi = prodiDAO.selectAllProdi(idFakultas);
+      	for(ProdiModel prodiSelected: allProdi) {
+      		if (prodiSelected.getId().equals(idProdi)){
+      			model.addAttribute("prodiSelected", prodiSelected);
+      		}
+      	}
+      	model.addAttribute("idProdi", idProdi);
+      	
+      	List<StudentModel> mahasiswa = studentDAO.selectAllStudentsByProdi(idProdi);
+      	String size = String.valueOf(mahasiswa.size());
+      	log.info("size "+size);
+      	model.addAttribute("mahasiswa", mahasiswa);
+		return "search-mahasiswa";
+  	}
+    
     //*****************************
     //BELUM DIPAKE
     //*****************************
@@ -220,19 +312,6 @@ public class StudentController
         if (student != null) {
             model.addAttribute ("student", student);
             return "view";
-        } else {
-            model.addAttribute ("npm", npm);
-            return "not-found";
-        }
-    }
-
-    @RequestMapping("/student/delete/{npm}")
-    public String delete (Model model, @PathVariable(value = "npm") String npm)
-    {
-    	StudentModel student = studentDAO.selectStudent(npm);
-        if (student != null) {
-        	studentDAO.deleteStudent (npm);
-            return "delete";
         } else {
             model.addAttribute ("npm", npm);
             return "not-found";
